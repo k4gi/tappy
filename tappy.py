@@ -32,6 +32,7 @@ def get_string(window):
     return out_str
 
 def read_command(user_input_string):
+    global user_name
     out_str = ""
     user_input_list = user_input_string.split()
     if user_input_list[0] == "help":
@@ -56,7 +57,6 @@ def read_command(user_input_string):
         if len(user_input_list) == 1:
             out_str += "Error: missing argument\n"
         else:
-            global user_name
             user_name = user_input_list[1]
             out_str += "Name changed to "
             out_str += user_name
