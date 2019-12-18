@@ -181,14 +181,23 @@ def p_town(window, user_invoke_list):
                 town_house_progress = 0
                 town_houses += 1
                 window.addstr("A new house has finished construction!\n")
+        # general status update
         window.addstr("The Town has " town_houses + " houses.\n")
         window.addstr("The stockpiles hold " + town_food + " food,\n")
         window.addstr("                and " + town_wood + " wood.\n")
         window.addstr("What will the next day bring?\n\n")
 
-        window.addstr(user_prompt)
-        user_input = get_string(window)
-        user_input_list = user_input.split()
+        while user_input != "exit" && user_input != "continue":
+            window.addstr("Listing options . . .\n1: idk\n")
+            window.addstr(user_prompt)
+            user_input = get_string(window)
+            user_input_list = user_input.split()
+            if user_input_list[0] == 1:
+                # some code here i guess
+            elif user_input_list[0] == "exit":
+                user_input = "exit"
+            else:
+                user_input = "continue"
 
 def read_command(window, user_input_string):
     user_input_list = user_input_string.split()
