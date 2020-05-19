@@ -117,6 +117,18 @@ def p_random(window, user_input_list):
                     window.addstr("Correct! You got it in " + str(tries) + " tries!\n")
                     user_input = "exit"
 
+def p_notes(window, user_input_list):
+    window.addstr("==Notes==\n( o ) Open Notes app\n( q ) Quit to terminal\n> ")
+    #input loop
+    user_input = ""
+    while user_input != 'q':
+        user_input = window.getch()
+
+        if user_input == 'q':
+            window.addstr("Goodbye.\n")
+        elif user_input == 'o':
+            window.addstr("uhh what now\n")
+
 
 def read_command(window, user_input_string):
     user_input_list = user_input_string.split()
