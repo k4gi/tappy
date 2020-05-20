@@ -187,7 +187,7 @@ def p_town(window, user_invoke_list):
             town_pop_starving -= 1
             town_pop_dead += 1
         town_food -= town_pop_starving
-        while town_food > 0 && town_pop_starving > 0: # satiate the starving
+        while town_food > 0 and town_pop_starving > 0: # satiate the starving
             town_food -= 1
             town_pop_starving -= 1
             town_pop += 1
@@ -204,18 +204,19 @@ def p_town(window, user_invoke_list):
                 town_houses += 1
                 window.addstr("A new house has finished construction!\n")
         # general status update
-        window.addstr("The Town has " town_houses + " houses.\n")
+        window.addstr("The Town has " + town_houses + " houses.\n")
         window.addstr("The stockpiles hold " + town_food + " food,\n")
         window.addstr("                and " + town_wood + " wood.\n")
         window.addstr("What will the next day bring?\n\n")
 
-        while user_input != "exit" && user_input != "continue":
+        while user_input != "exit" and user_input != "continue":
             window.addstr("Listing options . . .\n1: idk\n")
             window.addstr(user_prompt)
             user_input = get_string(window)
             user_input_list = user_input.split()
             if user_input_list[0] == 1:
                 # some code here i guess
+                empty = ""
             elif user_input_list[0] == "exit":
                 user_input = "exit"
             else:
