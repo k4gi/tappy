@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import curses
+import curses.panel as panel
 import random
 
 user_name = "user"
@@ -128,6 +129,15 @@ def p_notes(window, user_input_list):
             window.addstr("Goodbye.\n")
         elif user_input == 'o':
             window.addstr("uhh what now\n")
+
+            #Program begins here
+            # I now accept curses.panel as my lord and saviour
+            i_am_a_panel = panel.new_panel( curses.newwin( 10, 30, 5, 5 ) )
+
+            panel.update_panels()
+            curses.doupdate()
+
+            i_am_a_panel.window().getch()
 
 def p_explore(window, user_input_list):
     window.addstr("You're lost on an island. Can you find your way back home?\n-----\n")
