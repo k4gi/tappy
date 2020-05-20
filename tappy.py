@@ -123,7 +123,7 @@ def p_notes(window, user_input_list):
     #input loop
     user_input = ""
     while user_input != 'q':
-        user_input = window.getch()
+        user_input = window.getkey()
 
         if user_input == 'q':
             window.addstr("Goodbye.\n")
@@ -133,11 +133,12 @@ def p_notes(window, user_input_list):
             #Program begins here
             # I now accept curses.panel as my lord and saviour
             i_am_a_panel = panel.new_panel( curses.newwin( 10, 30, 5, 5 ) )
-
+            i_am_a_panel.window().box('|','-')
             panel.update_panels()
             curses.doupdate()
 
-            i_am_a_panel.window().getch()
+            i_am_a_panel.window().getkey()
+            curses.beep()
 
 def p_explore(window, user_input_list):
     window.addstr("You're lost on an island. Can you find your way back home?\n-----\n")
@@ -241,6 +242,8 @@ def read_command(window, user_input_string):
             p_explore(window, user_input_list)
         elif user_input_list[0] == "town":
             p_town(window, user_input_list)
+        elif user_input_list[0] == "notes":
+            p_notes(window, user_input_list)
         else:
             out_str = ""
             out_str += "Error: did not recognise command "
