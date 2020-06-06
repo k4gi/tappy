@@ -128,17 +128,18 @@ def p_notes(window, user_input_list):
         if user_input == 'q':
             window.addstr("Goodbye.\n")
         elif user_input == 'o':
-            window.addstr("uhh what now\n")
-
+            window.addstr("Starting Notes...\n")
+            
             #Program begins here
-            # I now accept curses.panel as my lord and saviour
-            i_am_a_panel = panel.new_panel( curses.newwin( 10, 30, 5, 5 ) )
-            i_am_a_panel.window().box('|','-')
-            panel.update_panels()
-            curses.doupdate()
+            while user_input != 'q':
+                # I now accept curses.panel as my lord and saviour
+                i_am_a_panel = panel.new_panel( curses.newwin( curses.LINES, curses.COLS, 0, 0 ) )
+                i_am_a_panel.window().box('|','-')
+                i_am_a_panel.window().addstr( 1, 1, "Line 1" )
+                panel.update_panels()
+                curses.doupdate()
 
-            i_am_a_panel.window().getkey()
-            curses.beep()
+                user_input = i_am_a_panel.window().getkey()
 
 def p_explore(window, user_input_list):
     window.addstr("You're lost on an island. Can you find your way back home?\n-----\n")
