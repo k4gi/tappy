@@ -224,13 +224,53 @@ def p_town(window, user_invoke_list):
             else:
                 user_input = "continue"
 
+# == bbs globals ==
+bbs_story_stage = 0
+bbs_username = ""
+
+def p_bbs(window, user_input_list):
+    #hello there
+    window.addstr("Welcome to BBS_apricot, " + bbc_username + "\n")
+
+    if bbs_story_stage == 0: #first run
+        bbs_story_stage = 1
+        window.addstr("Hi! I see it is your first time running BBS_apricot.\nPlease enter a username. This name will identify you through the entire Bulletin Board community.\n")
+        nodecision = True
+        while nodecision:
+            window.addstr("Username: ")
+            user_input = get_string(window)
+            window.addstr("\nSo you want " + user_input + " to be your username?\n( y ) ( n ):")
+            yes = window.get_key()
+            string.lower(yes)
+            if yes == "y":
+                nodecision = False
+                bbs_username = user_input
+            else:
+                window.addstr("Please enter the username you want.\n")
+        window.addstr("Enjoy your stay!\n")
+    
+    if len(user_input_list) == 1:
+        #no argument? if i coded that right idk
+        x = 1
+    elif user_input_list[1] == "connect":
+        #connect to a bbs!
+        x = 2
+        if len(user_input_list) == 2:
+            window.addstr("No address specified\n")
+        elif user_input_list[2] == "newbox.apri":
+            #this is a bbs! i think
+            x = 3
+    elif user_input_list[1] == "inbox":
+        #stuff you download or get sent
+        x = 4
+
 def read_command(window, user_input_string):
     user_input_list = user_input_string.split()
     if user_input_list:
         if user_input_list[0] == "help":
             p_help(window, user_input_list)
         elif user_input_list[0] == "hello":
-            p_hello(window, user_input_list)
+            p_hello(window, ser_input_list)
         elif user_input_list[0] == "changemyname":
             p_changemyname(window, user_input_list)
         elif user_input_list[0] == "ls":
@@ -245,6 +285,8 @@ def read_command(window, user_input_string):
             p_town(window, user_input_list)
         elif user_input_list[0] == "notes":
             p_notes(window, user_input_list)
+        elif user_input_list[0] == "bbs":
+            p_bbs(window, user_input_list)
         else:
             out_str = ""
             out_str += "Error: did not recognise command "
