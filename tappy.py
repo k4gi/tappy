@@ -230,7 +230,7 @@ bbs_username = ""
 
 def p_bbs(window, user_input_list):
     #hello there
-    window.addstr("Welcome to BBS_apricot, " + bbc_username + "\n")
+    window.addstr("Welcome to BBS_apricot, " + bbs_username + "\n")
 
     if bbs_story_stage == 0: #first run
         bbs_story_stage = 1
@@ -264,6 +264,14 @@ def p_bbs(window, user_input_list):
         #stuff you download or get sent
         x = 4
 
+def p_tower(window, user_input_list):
+    begin_x = 20; begin_y = 7
+    height = 5; width = 40
+    gamewindow = curses.newwin(height, width, begin_y, begin_x)
+    for i in height:
+        gamewindow.addstr("a" * width)
+    getstring(gamewindow)
+
 def read_command(window, user_input_string):
     user_input_list = user_input_string.split()
     if user_input_list:
@@ -286,6 +294,8 @@ def read_command(window, user_input_string):
         elif user_input_list[0] == "notes":
             p_notes(window, user_input_list)
         elif user_input_list[0] == "bbs":
+            p_bbs(window, user_input_list)
+        elif user_input_list[0] == "tower":
             p_bbs(window, user_input_list)
         else:
             out_str = ""
